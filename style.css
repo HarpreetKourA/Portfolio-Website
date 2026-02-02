@@ -1,0 +1,1764 @@
+:root {
+    --bg-color: #f2f2f2;
+    --text-color: #111;
+    --accent-color: #333;
+    --glass-bg: rgba(200, 200, 200, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    /* White background for the page */
+    color: var(--text-color);
+    min-height: 100vh;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center the app container */
+    position: relative;
+    /* Space for fixed nav */
+}
+
+/* Default: Hide mobile menu button on desktop */
+.mobile-menu-btn {
+    display: none;
+}
+
+/* Renamed from .app-container */
+.hero-card {
+    width: 98vw;
+    height: 96vh;
+    background-color: var(--bg-color);
+    /* The light grey */
+    border-radius: 100px;
+    /* Increased rounded corners */
+    /* Large rounded corners */
+    position: relative;
+    overflow: hidden;
+    /* Clip content at corners */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+    /* Optional subtle shadow */
+    flex-shrink: 0;
+    /* Ensures it stays full size */
+    margin-top: 2vh;
+}
+
+/* Header / Logo */
+header {
+    position: absolute;
+    top: 50%;
+    /* Vertically centered relative to container */
+    left: 8%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.logo {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3.5rem;
+    letter-spacing: -2px;
+    margin-bottom: 15px;
+    color: #111;
+    text-transform: uppercase;
+}
+
+.sub-logo {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: #333;
+    letter-spacing: 1px;
+}
+
+/* Hero Section */
+.hero {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Vertically align image */
+    position: relative;
+}
+
+.center-image-container {
+    height: 90vh;
+    /* Reduced from 85% to 65% */
+    /* Adjust height within container */
+    z-index: 5;
+    mix-blend-mode: multiply;
+    display: flex;
+    align-items: flex-end;
+    /* Align bottom of image */
+    /* Helps blend the BW image with bg */
+}
+
+.center-image {
+    height: 100%;
+    /* Reduced from 100% */
+    width: auto;
+    object-fit: contain;
+    /* Ensure it fits */
+    filter: contrast(1.1) grayscale(100%);
+    /* Moved here so it blends with background but glass sits on top */
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-text {
+    position: absolute;
+    right: 4%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 450px;
+    /* Increased from 300px */
+    font-size: 1.1rem;
+    /* Increased from 0.9rem */
+    line-height: 1.8;
+    /* Increased spacing */
+    padding: 20px;
+    /* added padding */
+    color: #444;
+    font-weight: 400;
+}
+
+/* Floating Nav - now FIXED to view */
+.floating-nav {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(100, 100, 100, 0.4), rgba(150, 150, 150, 0.2));
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 10px 10px 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--glass-border);
+    z-index: 100;
+    gap: 40px;
+}
+
+.nav-icon {
+    width: 40px;
+    height: 40px;
+    background: #ffa500;
+    /* Fallback */
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    /* In the reference it looks like white text on the dark glass */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    transition: opacity 0.3s;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.nav-links a:hover {
+    opacity: 0.7;
+}
+
+.contact-btn {
+    background: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.contact-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Projects Section */
+.projects {
+    width: 98vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    /* Removed bottom padding since body has it */
+    box-sizing: border-box;
+}
+
+.project-card {
+    position: relative;
+    width: 100%;
+    height: 800px;
+    /* Increased from 600px */
+    border-radius: 60px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.project-card:hover {
+    transform: scale(0.98);
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.05);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: rgba(0, 0, 0, 0.45);
+    /* More opaque black for all */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Removed specific tints so all use the base black overlay */
+
+.card-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+    text-transform: uppercase;
+}
+
+.card-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 15px;
+    /* Reduced from 30px */
+}
+
+/* Explore Button */
+.explore-btn {
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Even more transparent */
+    backdrop-filter: blur(5px);
+    /* specific to button */
+    -webkit-backdrop-filter: blur(5px);
+    color: #fff;
+    /* Start hidden and zero height */
+    padding: 0;
+    max-height: 0;
+    margin-top: 0;
+    border: none;
+    /* No border */
+    overflow: hidden;
+
+    border-radius: 30px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+}
+
+.project-card:hover .explore-btn {
+    padding: 12px 30px;
+    max-height: 60px;
+    /* Enough to fit text + padding */
+    margin-top: 10px;
+    /* Reduced from 20px */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.explore-btn:hover {
+    background-color: #000;
+    /* No border on hover */
+}
+
+/* About Section */
+.about {
+    width: 100%;
+    /* Gradient transition from white to black */
+    background: linear-gradient(to bottom, #ffffff 20%, #000000 80%);
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    /* No padding on sides, card is nearly full width */
+    padding-bottom: 50px;
+}
+
+.about-card {
+    width: 98vw;
+    height: 800px;
+    background-color: #ff8c00;
+    /* Fallback orange */
+    border-radius: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Adjust object position if needed to center the silhouette */
+    object-position: center 20%;
+}
+
+.about-glass-pill {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    /* Adjusted left */
+    transform: translateY(-50%);
+    width: 600px;
+    /* Increased size to fit text */
+    height: 200px;
+    /* Increased size */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 30px;
+    /* Reduced border radius */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    gap: 30px;
+    /* Increased gap */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.about-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    color: #fff;
+    opacity: 0.9;
+    white-space: nowrap;
+}
+
+.about-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 4.5rem;
+    /* Increased size */
+    color: #fff;
+    letter-spacing: -2px;
+}
+
+.about-text {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    width: 300px;
+    color: #fff;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    text-align: left;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    /* ... existing responsive ... */
+
+    .about-card {
+        height: auto;
+        min-height: 800px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-glass-pill {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin-top: -100px;
+        /* Overlap image */
+        margin-bottom: 20px;
+    }
+
+    .about-text {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        width: 80%;
+        text-align: center;
+        padding-bottom: 40px;
+    }
+
+    .card-overlay {
+        width: 300px;
+        height: 250px;
+    }
+
+    .card-subtitle {
+        margin-top: 10px;
+    }
+}
+
+/* Clients Section */
+.clients {
+    width: 100%;
+    /* Continue the black background from the bottom of about section */
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    padding-bottom: 40px;
+    /* Extra space at bottom */
+}
+
+.clients-card {
+    width: 98vw;
+    height: 800px;
+    background-color: #111111;
+    /* Very dark grey/black */
+    border-radius: 100px;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Vertically center content */
+    box-sizing: border-box;
+}
+
+.clients-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
+    /* More space below header */
+}
+
+.clients-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 4rem;
+    /* Larger */
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+}
+
+.clients-description {
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 400px;
+    text-align: left;
+    margin-top: 10px;
+    /* Align with top of title approx */
+}
+
+.clients-carousel-window {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    /* Mask to fade edges */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.clients-track {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: scroll 20s linear infinite;
+}
+
+/* Pause on hover if desired, but user asked for scrollable/carousel */
+.clients-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-33.33%);
+    }
+}
+
+.client-logo-card {
+    background-color: #1a1a1a;
+    border-radius: 40px;
+    height: 250px;
+    /* Fixed height */
+    width: 250px;
+    /* Fixed width for consistent carousel */
+    flex-shrink: 0;
+    /* Don't shrink */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.client-logo-card:hover {
+    background-color: #222;
+    /* No transform */
+}
+
+.client-logo {
+    width: 50%;
+    /* Smaller logos */
+    height: auto;
+    object-fit: contain;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.client-logo-card:hover .client-logo {
+    opacity: 1;
+}
+
+/* Services & Milestones Section */
+/* Services & Milestones Section */
+.services-milestones {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    gap: 20px;
+    /* Increased outer padding */
+    background-color: #000;
+    /* Continue dark theme */
+}
+
+.services-content-wrapper {
+    width: 98vw;
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    /* Increased gap */
+}
+
+.split-card {
+    flex: 1;
+    background-color: #111;
+    /* Very dark grey */
+    border-radius: 80px;
+    height: 800px;
+    padding: 80px;
+    /* Increased padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5rem;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    z-index: 10;
+}
+
+/* 3D Carousel Styles */
+.carousel-container {
+    width: 100%;
+    height: 400px;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.carousel-3d {
+    width: 200px;
+    /* Reduced Size */
+    height: 280px;
+    /* Reduced Size */
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.carousel-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    overflow: hidden;
+    background: #222;
+    /* Arrangement for 3 items: 0, 120, 240 degrees */
+    /* We set these initially, script can rotate parent */
+    opacity: 0.6;
+    transition: opacity 0.3s, transform 0.3s;
+    /* Adding a border to match reference look of cards */
+}
+
+/* Specific item initial positions for 3 items circle */
+.carousel-item:nth-child(1) {
+    transform: rotateY(0deg) translateZ(200px);
+    /* Adjusted Z */
+}
+
+.carousel-item:nth-child(2) {
+    transform: rotateY(120deg) translateZ(200px);
+    /* Adjusted Z */
+}
+
+.carousel-item:nth-child(3) {
+    transform: rotateY(240deg) translateZ(200px);
+    /* Adjusted Z */
+}
+
+.carousel-item.active {
+    opacity: 1;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.service-info {
+    margin-top: auto;
+    /* Push to bottom */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    margin-top: 100px;
+    margin-bottom: 40px;
+    position: relative;
+    /* Ensure z-index works */
+    z-index: 100;
+    /* Bring above carousel images if they rotate low */
+}
+
+.service-pill {
+    background: #fff;
+    color: #000;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-family: 'Inter', sans-serif;
+    /* Monotype look in ref, or standard sans */
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+}
+
+.service-description {
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 500px;
+    transition: opacity 0.3s;
+}
+
+/* Milestones Styles */
+.milestones-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 60px;
+    width: 100%;
+}
+
+.milestone-item {
+    text-align: center;
+}
+
+.milestone-number {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 5rem;
+    color: #fff;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.plus {
+    color: #555;
+    /* Darker plus sign as in ref */
+    font-size: 4rem;
+}
+
+.milestone-label {
+    color: #aaa;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+}
+
+.milestone-separator {
+    width: 40%;
+    height: 1px;
+    background-color: #333;
+}
+
+/* Journal Section */
+.journal {
+    width: 100%;
+    /* Continue black bg from previous section */
+    background-color: #000;
+    padding: 20px 0 40px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.journal-content-wrapper {
+    width: 98vw;
+    background-color: #0c0c0c;
+    /* Dark Card Background */
+    border-radius: 100px;
+    /* Rounded corners */
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.journal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 80px;
+    padding: 0 40px;
+}
+
+.journal-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 4.5rem;
+    /* Big like "CLIENTS" */
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.journal-description {
+    font-family: 'Inter', sans-serif;
+    color: #aaa;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 400px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.journal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.journal-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.journal-card:hover {
+    transform: translateY(-10px);
+}
+
+.journal-image-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    /* Square images as per reference */
+    border-radius: 60px;
+    /* Large rounded corners */
+    overflow: hidden;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.journal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.journal-card:hover .journal-image {
+    transform: scale(1.05);
+}
+
+.journal-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.journal-article-title {
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+    max-width: 90%;
+}
+
+.journal-tag {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    color: #fff;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+/* Contact Section */
+.contact {
+    width: 100%;
+    /* Continue black bg */
+    background-color: #000;
+    padding: 0 0 40px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-card {
+    width: 98vw;
+    height: 800px;
+    border-radius: 100px;
+    position: relative;
+    overflow: hidden;
+    /* Fallback/Base styling */
+    background-color: #050505;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Background Effects */
+.contact-bg-glow {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 80%;
+    height: 100%;
+    /* Red Glow to mimic tail light */
+    background: radial-gradient(circle at 80% 50%, rgba(200, 20, 20, 0.6) 0%, rgba(100, 0, 0, 0.3) 40%, transparent 80%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.contact-noise {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/noise.svg');
+    opacity: 0.05;
+    /* Reduced from 0.15 */
+    z-index: 2;
+    pointer-events: none;
+    filter: contrast(120%) brightness(100%);
+    /* Make it grainy */
+}
+
+/* Content Layout */
+.contact-content {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 100px;
+}
+
+/* Left Side */
+.contact-text-side {
+    width: 45%;
+}
+
+.contact-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 5rem;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.contact-description {
+    font-family: 'Inter', sans-serif;
+    color: #ccc;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 450px;
+}
+
+/* Right Side - Form */
+.contact-form-wrapper {
+    width: 100%;
+    max-width: 500px;
+    /* Use max-width for responsiveness */
+    background: rgba(40, 40, 40, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    padding: 40px;
+    /* Reduced padding slightly */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    /* Ensure padding doesn't break width */
+    overflow: hidden;
+    /* contain children */
+}
+
+.form-header {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.form-group input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 15px;
+    color: #fff;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: background 0.3s;
+}
+
+.form-group input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.submit-btn {
+    margin-top: 10px;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 30px;
+    padding: 15px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    transform: scale(1.02);
+}
+
+/* Footer Section */
+.footer {
+    width: 100%;
+    background-color: #000;
+    padding: 0 0 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-card {
+    width: 98vw;
+    background-color: #0c0c0c;
+    /* Dark Card Background */
+    border-radius: 100px;
+    padding: 100px 80px 100px 60px !important;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 100px;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-col {
+    width: 40%;
+}
+
+.footer-label {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: #fff;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.footer-email {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.footer-description {
+    font-family: 'Inter', sans-serif;
+    color: #aaa;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+.footer-credit {
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.nav-col {
+    width: 20%;
+}
+
+.footer-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer-nav li a {
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Press Start 2P', cursive;
+    /* Using pixel font for nav as per image look, likely custom font but this fits */
+    /* Or maybe Inter but bold? The image looks like Inter bold actually for menu items except they look pixelated? 
+       Wait, looking closer at "Projects (06)", the (06) is definitely Inter/Sans. The text "Projects" looks like the pixel font? 
+       Actually "Home", "About" look like pixel font in the image. Let's use Press Start 2P but smaller. */
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    /* Large menu items */
+    transition: color 0.3s;
+    letter-spacing: -0.5px;
+}
+
+/* Looking closer at the image, "Home", "About", "Projects" look like a funky display font or pixel font. 
+   Let's stick to Inter for cleanliness or Press Start if user wants pixel. 
+   User said "as it is". The font in image is definitely pixelated/square. 
+   Let's use Press Start 2P. */
+.footer-nav li a {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    line-height: 2;
+}
+
+.footer-nav li a sup {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    vertical-align: top;
+    margin-left: 5px;
+    color: #aaa;
+}
+
+.social-col {
+    width: 20%;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background: #333;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    transition: background 0.3s;
+}
+
+.social-icon:hover {
+    background: #555;
+}
+
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-logo {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8vw;
+    /* Resize with viewpoint */
+    color: #ccc;
+    text-transform: lowercase;
+    /* "Magnetto" in image is lowercase "magnetto"?? No it is "Magnetto" mixed case pixelated */
+    /* Actually image shows "Magnetto" with pixel squares. */
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+.copyright {
+    font-family: 'Inter', sans-serif;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Responsive Footer */
+@media (max-width: 1024px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .contact-col,
+    .nav-col,
+    .social-col {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    .footer-nav {
+        align-items: center;
+    }
+
+    .footer-card {
+        padding: 60px 30px;
+        padding-bottom: 150px;
+    }
+
+    .footer-email {
+        font-size: 1.5rem;
+        word-break: break-all;
+    }
+}
+
+@media (max-width: 1024px) {
+    .contact-content {
+        flex-direction: column;
+        justify-content: center;
+        padding: 60px 20px;
+        gap: 60px;
+    }
+
+    .contact-card {
+        height: auto;
+        min-height: 800px;
+    }
+
+    .contact-text-side {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-title {
+        font-size: 3rem;
+    }
+
+    .contact-form-wrapper {
+        width: 100%;
+        max-width: 500px;
+        padding: 30px;
+    }
+
+    .contact-bg-glow {
+        background: radial-gradient(circle at 50% 50%, rgba(200, 20, 20, 0.5) 0%, transparent 70%);
+        width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1024px) {
+    .journal-header {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 20px;
+    }
+
+    .journal-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .journal-title {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .services-content-wrapper {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .split-card {
+        width: 100%;
+        height: auto;
+        min-height: 700px;
+        padding: 40px;
+    }
+
+    .carousel-container {
+        height: 300px;
+        /* Smaller container on mobile */
+    }
+
+    .carousel-3d {
+        width: 200px;
+        height: 280px;
+    }
+
+    .carousel-item:nth-child(1) {
+        transform: rotateY(0deg) translateZ(180px);
+    }
+
+    .carousel-item:nth-child(2) {
+        transform: rotateY(120deg) translateZ(180px);
+    }
+
+    .carousel-item:nth-child(3) {
+        transform: rotateY(240deg) translateZ(180px);
+    }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+
+    /* Clients Responsive */
+    .clients-card {
+        padding: 40px;
+        height: auto;
+    }
+
+    .clients-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .clients-carousel-window {
+        width: 100%;
+    }
+
+    .clients-track {
+        gap: 20px;
+    }
+
+    .client-logo-card {
+        width: 180px;
+        /* Smaller on mobile */
+        height: 180px;
+    }
+
+    /* General Responsive */
+    header {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        padding: 60px 40px 10px;
+        text-align: center;
+    }
+
+    .hero-card {
+        height: auto;
+        min-height: 90vh;
+        flex-direction: column;
+    }
+
+    .hero {
+        flex-direction: column;
+    }
+
+    .hero-text {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 80%;
+        text-align: center;
+        margin: 20px auto 0 auto;
+        /* Centered horizontally */
+        padding-bottom: 40px;
+    }
+
+    .center-image-container {
+        height: 45vh;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .center-image {
+        height: 100%;
+    }
+
+    .projects {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        height: 500px;
+    }
+
+    .about-card {
+        height: 100vh;
+        /* Set to full viewport height */
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* Center content vertically if 100vh */
+    }
+
+    .about-glass-pill {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin-top: -100px;
+        margin-bottom: 20px;
+        width: auto !important;
+        /* Let it shrink to content */
+        max-width: 80%;
+        /* Limit max width */
+        padding: 5px 20px;
+        /* Reduced vertical padding */
+    }
+
+    .about-text {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        width: 80%;
+        text-align: center;
+        padding-bottom: 40px;
+    }
+
+    .floating-nav {
+        width: 90%;
+        justify-content: space-between;
+        gap: 10px;
+    }
+}
+
+
+/* Mobile Breakpoint (Phones) */
+@media (max-width: 768px) {
+
+    /* Global Adjustments */
+    /* Global Adjustments */
+    .hero-card,
+    .about-card,
+    .clients-card,
+    .split-card,
+    .journal-content-wrapper,
+    .contact-card,
+    .footer-card {
+        border-radius: 40px !important;
+        /* Reduce large rounded corners */
+        width: 95vw;
+        /* Slightly wider on mobile */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        /* Vertically center content */
+    }
+
+    /* Hero Section */
+    .logo {
+        font-size: 2.5rem;
+        /* Increased logo size */
+    }
+
+    .sub-logo {
+        font-size: 0.6rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    /* Projects */
+    .project-card {
+        border-radius: 40px;
+        height: 400px;
+        /* Shorter cards */
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        /* Reduced from 2.5rem/2rem */
+    }
+
+    .project-info {
+        padding: 10px 20px !important;
+        /* Smaller blur container */
+        width: 85% !important;
+        /* Slightly narrower */
+        margin-bottom: 20px;
+    }
+
+    /* About */
+    .about-title {
+        font-size: 1.8rem;
+    }
+
+    .about-text {
+        width: 75% !important;
+    }
+
+    /* Clients */
+    .clients-title {
+        font-size: 2.5rem;
+    }
+
+    /* Services */
+    .services-milestones {
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 20px;
+        /* Space between cards */
+        display: flex;
+        /* Ensure flex is active */
+        align-items: center;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 20px !important;
+        /* Reduced space below heading */
+    }
+
+    .service-info {
+        margin-top: 20px !important;
+        /* Reduced space below slider */
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .carousel-3d {
+        width: 150px;
+        /* Smaller carousel */
+        height: 220px;
+    }
+
+    .carousel-item:nth-child(1) {
+        transform: rotateY(0deg) translateZ(140px);
+    }
+
+    .carousel-item:nth-child(2) {
+        transform: rotateY(120deg) translateZ(140px);
+    }
+
+    .carousel-item:nth-child(3) {
+        transform: rotateY(240deg) translateZ(140px);
+    }
+
+    /* Journal */
+    .journal-header {
+        text-align: center;
+        align-items: center;
+        /* If flex */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .journal-title {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        /* Improve spacing */
+    }
+
+    .journal-description {
+        text-align: center;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .journal-content-wrapper {
+        padding: 80px 20px 40px 20px;
+        /* Increased top padding */
+    }
+
+    /* Contact */
+    .contact-title {
+        font-size: 2.5rem;
+        /* Fix getting cut off */
+    }
+
+    .contact-description {
+        font-size: 0.9rem;
+    }
+
+    .contact-form-wrapper {
+        padding: 20px;
+    }
+
+    .contact-card {
+        padding-bottom: 50px;
+        /* Adjust spacing */
+    }
+
+    /* Footer */
+    .footer-card {
+        padding: 60px 20px 100px 20px !important;
+        /* Override layout padding */
+    }
+
+    .footer-email {
+        font-size: 1.2rem;
+        /* Prevent overflow */
+    }
+
+    .footer-logo {
+        font-size: 10vw;
+        /* Reduced from 15vw */
+    }
+
+    .footer-nav {
+        gap: 10px;
+        /* Reduced gap */
+    }
+
+    .footer-nav li a {
+        font-size: 0.9rem;
+        /* Reduced font size */
+    }
+
+    .floating-nav {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .nav-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .contact-btn {
+        padding: 8px 16px;
+        font-size: 0.7rem;
+    }
+
+    /* Mobile Nav Styles */
+    .nav-links,
+    .desktop-contact-btn {
+        display: none !important;
+    }
+
+    .mobile-menu-btn {
+        display: block !important;
+        background: #fff;
+        color: #000;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.7rem;
+        cursor: pointer;
+    }
+
+    /* Floating Nav Mobile Override */
+    .floating-nav {
+        width: 90%;
+        justify-content: space-between;
+        padding: 10px 15px;
+        /* Match desktop padding roughly or keep small */
+    }
+
+    /* Expanded Mobile Menu State */
+    .floating-nav.active {
+        flex-direction: column;
+        justify-content: flex-start;
+        /* Start from top */
+        padding: 40px 20px 30px 20px;
+        border-radius: 40px;
+        background: linear-gradient(180deg, #1a2a2a 0%, #0d0d0d 100%);
+        /* Gradient match */
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        height: 90vh;
+        /* High height */
+        bottom: 0;
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        z-index: 9999;
+        transform: none;
+        /* Reset center transform */
+        left: 0;
+    }
+
+    .floating-nav.active .mobile-menu-btn {
+        order: -1;
+        /* Move to TOP */
+        background: transparent;
+        color: #fff;
+        border: none;
+        font-size: 2rem;
+        width: auto;
+        height: auto;
+        align-self: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        display: block !important;
+    }
+
+    .floating-nav.active .nav-links {
+        display: flex !important;
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+        width: 100%;
+        margin: auto 0;
+        /* Vertically Center */
+    }
+
+    .floating-nav.active .nav-links a {
+        color: #fff;
+        font-size: 1.5rem;
+        text-decoration: none;
+        font-family: 'Press Start 2P', cursive;
+        letter-spacing: 1px;
+    }
+
+    .floating-nav.active .desktop-contact-btn {
+        display: inline-block !important;
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        background: #fff;
+        color: #000;
+        border-radius: 30px;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 1rem;
+        margin-top: 20px;
+        order: 2;
+        /* Ensure at bottom */
+    }
+
+    .floating-nav.active .nav-icon {
+        display: none;
+    }
+}
+
+/* Base styles for mobile elements (Hidden on Desktop) */
